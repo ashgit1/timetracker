@@ -1,0 +1,18 @@
+2015-09-03 13:02:02 ERROR Tester:40 - error message : could not instantiate RegionFactory [org.hibernate.cache.impl.bridge.RegionFactoryCacheProviderBridge]
+2015-09-03 13:02:31 ERROR Tester:40 - error message : could not instantiate RegionFactory [org.hibernate.cache.impl.bridge.RegionFactoryCacheProviderBridge]
+2015-09-03 13:04:20 ERROR Tester:45 - error message : could not instantiate RegionFactory [org.hibernate.cache.impl.bridge.RegionFactoryCacheProviderBridge]
+2015-09-03 13:08:24 ERROR Tester:45 - error message : not-null property references a null or transient value: com.wipro.timetracker.model.Project.projectActive
+2015-09-03 14:23:07 INFO  CreateTables:22 - Tables created
+2015-09-03 15:10:44 INFO  CreateTables:22 - Tables created
+2015-09-03 15:11:24 INFO  CreateTables:22 - Tables created
+2015-09-03 15:12:15 INFO  CreateTables:22 - Tables created
+2015-09-03 15:13:37 INFO  CreateTables:22 - Tables created
+2015-09-03 15:57:20 INFO  CreateTables:22 - Tables created
+2015-09-03 15:58:12 INFO  CreateTables:22 - Tables created
+2015-09-14 12:04:10 INFO  ProjectDaoImpl:49 - date in String : 2015-01-01
+2015-09-14 12:04:10 INFO  ProjectDaoImpl:49 - date in String : 2015-09-01
+2015-09-14 12:05:45 INFO  ProjectDaoImpl:49 - date in String : 2015-01-01
+2015-09-14 12:05:45 INFO  ProjectDaoImpl:51 - date in Date : Thu Jan 01 00:00:00 IST 2015
+2015-09-14 12:05:45 INFO  ProjectDaoImpl:49 - date in String : 2015-09-01
+2015-09-14 12:05:45 INFO  ProjectDaoImpl:51 - date in Date : Tue Sep 01 00:00:00 IST 2015
+2015-09-14 13:16:20 INFO  CreateTables:22 - Tables created
