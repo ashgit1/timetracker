@@ -16,3 +16,5 @@
 2015-09-14 12:05:45 INFO  ProjectDaoImpl:49 - date in String : 2015-09-01
 2015-09-14 12:05:45 INFO  ProjectDaoImpl:51 - date in Date : Tue Sep 01 00:00:00 IST 2015
 2015-09-14 13:16:20 INFO  CreateTables:22 - Tables created
+2015-12-03 16:33:01 INFO  CompOffDaoImpl:49 - compoff deleted for : 4
+2015-12-09 10:43:20 INFO  CreateTables:22 - Tables created

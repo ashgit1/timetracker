@@ -3,8 +3,6 @@ package com.wipro.timetracker.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -24,13 +22,12 @@ public class Users {
 	@Column(name="DISPLAY_NAME", nullable = false)
 	private String displayName;
 	
-	@ManyToOne
-	@JoinColumn(name = "PROJECT_ID")
-	private Project projectId;
+	@Column(name="PROJECT_ID", nullable = false)
+	private int projectID;
 	
-	@ManyToOne
-	@JoinColumn(name = "ROLE_ID")
-	private Role roleId;
+	@Column(name="ROLE_ID", nullable = false)
+	private int roleId;
+	
 
 	@Column(name="USER_ID")
 	public int getUserId() {
@@ -68,21 +65,21 @@ public class Users {
 		this.displayName = displayName;
 	}
 
-	@Column(name = "PROJECT_ID")
-	public Project getProjectId() {
-		return projectId;
+	@Column(name="PROJECT_ID")
+	public int getProjectID() {
+		return projectID;
 	}
 
-	public void setProjectId(Project projectId) {
-		this.projectId = projectId;
+	public void setProjectID(int projectID) {
+		this.projectID = projectID;
 	}
 
-	@Column(name = "ROLE_ID")
-	public Role getRoleId() {
+	@Column(name="ROLE_ID")
+	public int getRoleId() {
 		return roleId;
 	}
 
-	public void setRoleId(Role roleId) {
+	public void setRoleId(int roleId) {
 		this.roleId = roleId;
 	}
 	

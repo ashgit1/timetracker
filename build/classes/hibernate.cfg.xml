@@ -35,6 +35,8 @@
 		<mapping class="com.wipro.timetracker.model.Project" />
 		<mapping class="com.wipro.timetracker.model.Role" />
 		<mapping class="com.wipro.timetracker.model.Users" />
+		<mapping class="com.wipro.timetracker.model.CompOff" />
+		<mapping class="com.wipro.timetracker.model.Efforts" />
 		
 	</session-factory>
 

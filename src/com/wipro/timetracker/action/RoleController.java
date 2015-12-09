@@ -63,7 +63,7 @@ public class RoleController extends HttpServlet {
                     response.getWriter().print(jsonArray);
             		
                 }catch(Exception ex){
-                    JSONROOT.put("Result", "ERROR while retrieving Role Details");
+                    JSONROOT.put("Result", "ERROR");
                     JSONROOT.put("Message", ex.getMessage());
                     String error = gson.toJson(JSONROOT);
                     response.getWriter().print(error);
