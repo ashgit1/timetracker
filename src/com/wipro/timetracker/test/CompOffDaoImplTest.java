@@ -21,12 +21,18 @@ public class CompOffDaoImplTest {
 		cobj.setTaskDesc(""); 		//USGR Release, Support for MRT 3010
 		cobj.setCompOffUtilized(9);
 		
-		coDaoTest.addCompOff(cobj);
+		/*coDaoTest.addCompOff(cobj);*/
 		
 		/**
 		 * To delete one compoff row.
 		 */
 		//coDaoTest.deleteCompOff(4);
+		
+		/*
+		 * Get the role_name based on user_id...
+		 */
+		System.out.println("RoleName for id 233995 : " + coDaoTest.getRoleName(233995));
+		
 	}
 
 }

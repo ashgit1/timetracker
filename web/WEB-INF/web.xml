@@ -76,4 +76,24 @@
     <servlet-name>WeekendSupportController</servlet-name>
     <url-pattern>/WeekendSupportController</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetUsersBasedProjectController</display-name>
+    <servlet-name>GetUsersBasedProjectController</servlet-name>
+    <servlet-class>com.wipro.timetracker.action.GetUsersBasedProjectController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetUsersBasedProjectController</servlet-name>
+    <url-pattern>/GetUsersBasedProjectController</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AdminViewSupport</display-name>
+    <servlet-name>AdminViewSupport</servlet-name>
+    <servlet-class>com.wipro.timetracker.action.AdminViewSupportController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminViewSupport</servlet-name>
+    <url-pattern>/AdminViewSupport</url-pattern>
+  </servlet-mapping>
 </web-app>

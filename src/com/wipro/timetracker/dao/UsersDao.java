@@ -14,6 +14,6 @@ public interface UsersDao {
 	List<Users> getAllUsers();
 	
 	Map<Integer, String> projectNames();
-	
+	Map<Integer, String> getUserDisplayNameBasedOnProject(String ParentValue);
 	
 }

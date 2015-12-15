@@ -5,9 +5,13 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Login to TS</title>
+<link rel="stylesheet" type="text/css" href="css/ts.css">
 </head>
 <body>
-<center>
+<jsp:include page="includes/_header.jsp"></jsp:include><br><br><br>
+<jsp:include page="includes/_navigation.jsp"></jsp:include>
+<center><br><br>
+<div id="loginDiv">
 <form method="post" action="LoginController" autocomplete="off">
             <table border="1" width="30%" cellpadding="3">
                 <thead>
@@ -32,7 +36,6 @@
                 </tbody>
             </table>
         </form>
-</body>
 <%
     if ((session.getAttribute("invalidUser") != null) && (session.getAttribute("invalidUser") != "")) {
 %>
@@ -41,5 +44,8 @@
 	session.setAttribute("invalidUser", null);
 	session.invalidate();
 }%>
+</div>
 </center>
+<jsp:include page="includes/_footer.jsp"></jsp:include>
+</body>
 </html>

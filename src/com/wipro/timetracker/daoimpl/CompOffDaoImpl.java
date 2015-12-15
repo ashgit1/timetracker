@@ -19,6 +19,8 @@ public class CompOffDaoImpl implements CompOffDao{
 	Session session;
 	Transaction transaction;
 	int userID;
+	List<CompOff> allComfOff;
+	String roleName;
 	
 	
 	@Override
@@ -55,9 +57,29 @@ public class CompOffDaoImpl implements CompOffDao{
 	
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public List<CompOff> getAllCompOff() {
+	public List<CompOff> getAllCompOff(int userID) {
+		
+		session = HibernateUtil.getSessionFactory().openSession();
+		transaction = session.beginTransaction();
+		String getAllCompOffQuery = "FROM CompOff co WHERE co.userId = :uid";
+		Query query = session.createQuery(getAllCompOffQuery);
+		query.setParameter("uid", userID);
+		allComfOff = (List<CompOff>) query.list();
+		
+		logger.info("compoff list size: " +allComfOff.size());
+		System.out.println("compoff list size: " +allComfOff.size());
+		
+		if(allComfOff.size() > 0){
+			return allComfOff;
+		}else{
+			transaction.rollback();
+			session.close();
+		}
+		
 		return null;
+		
 	}
 
 	@Override
@@ -70,6 +92,19 @@ public class CompOffDaoImpl implements CompOffDao{
 		transaction.commit();
 		session.close();
 		return userID;
+	}
+
+	@Override
+	public String getRoleName(int userId) {
+		
+		session = HibernateUtil.getSessionFactory().openSession();
+		transaction = session.beginTransaction();
+		String getUserRoleQuery = "select r.roleName from Role r where r.roleId = ( select u.roleId from Users u where u.userId = :userId )";
+		roleName = (String) session.createQuery(getUserRoleQuery).setInteger("userId", userId).uniqueResult();
+		transaction.commit();
+		session.close();
+		return roleName;
+		
 	}
 
 }

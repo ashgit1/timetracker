@@ -18,3 +18,11 @@
 2015-09-14 13:16:20 INFO  CreateTables:22 - Tables created
 2015-12-03 16:33:01 INFO  CompOffDaoImpl:49 - compoff deleted for : 4
 2015-12-09 10:43:20 INFO  CreateTables:22 - Tables created
+2015-12-15 16:06:41 INFO  UsersDaoImpl:170 - Ashish
+2015-12-15 16:06:41 INFO  UsersDaoImpl:170 - Roger
+2015-12-15 16:06:41 INFO  UsersDaoImpl:170 - Jay
+2015-12-15 16:06:41 INFO  UsersDaoImpl:170 - Navjot
+2015-12-15 16:07:49 INFO  UsersDaoImpl:170 - Ashish
+2015-12-15 16:07:49 INFO  UsersDaoImpl:170 - Roger
+2015-12-15 19:21:04 INFO  UsersDaoImpl:170 - Ashish
+2015-12-15 19:21:04 INFO  UsersDaoImpl:170 - Roger

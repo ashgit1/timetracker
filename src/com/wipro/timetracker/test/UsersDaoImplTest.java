@@ -41,6 +41,8 @@ public class UsersDaoImplTest {
 		 */
 		String roleName="Release Engineer";
 		System.out.println("Role Name: " + roleName + ", Role Id = " + userDaoTest.getRoleIdByName(roleName));
+	
+		//userDaoTest.getDisplayName();
 		
 	}
 

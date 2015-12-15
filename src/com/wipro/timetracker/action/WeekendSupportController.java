@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
@@ -23,6 +24,7 @@ public class WeekendSupportController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     CompOff compModel;
     CompOffDao compDao;
+    HttpSession session;
     
     public WeekendSupportController() {
         super();
@@ -72,7 +74,8 @@ public class WeekendSupportController extends HttpServlet {
 				}else{
 					logger.info("comp off object is null");
 				}
-				 
+				
+				//session.setAttribute("compoffAdded", "Success");
 				logger.info("one record saved while applying oncall/project");
 			}
 		}else {
@@ -100,11 +103,13 @@ public class WeekendSupportController extends HttpServlet {
 				logger.info("comp off object is null");
 			}
 			
+			/*response.sendRedirect("view_support.jsp");*/
 			logger.info("one record saved while applying comp-off");
+			
 			
 		}
 		
-		
+		 response.sendRedirect("view_support.jsp");
 	}
 
 }

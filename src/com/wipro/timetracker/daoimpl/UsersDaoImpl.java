@@ -1,6 +1,5 @@
 package com.wipro.timetracker.daoimpl;
 
-import java.util.List;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,9 +11,14 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
 import com.wipro.timetracker.dao.UsersDao;
 import com.wipro.timetracker.model.Users;
 import com.wipro.timetracker.util.DBUtil;
+import com.wipro.timetracker.util.HibernateUtil;
 
 public class UsersDaoImpl implements UsersDao{
 	
@@ -29,6 +33,10 @@ public class UsersDaoImpl implements UsersDao{
 	List<String> roleNames;
 	int projectId,roleId;
 	Map<Integer, String> projectsMap;
+	Map<Integer, String> UserDisplayNameBasedOnProject;
+	Session session;
+	Transaction transaction;
+	Query query;
 
 	public UsersDaoImpl(){
 		dbConnection = DBUtil.getCon();
@@ -145,6 +153,32 @@ public class UsersDaoImpl implements UsersDao{
         }
         
 		return projectsMap;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Map<Integer, String> getUserDisplayNameBasedOnProject(String ParentValue) {
+		
+		UserDisplayNameBasedOnProject = new HashMap<Integer, String>();
+		List<Users> userComboList = new ArrayList<Users>();
+		session = HibernateUtil.getSessionFactory().openSession();
+		transaction =  session.beginTransaction();
+		String getUserDisplayNameBasedOnProjectQuery=
+				"from Users u where u.projectID in " +
+                "(select p.projectId from Project p where p.projectName= :parentValue ) and u.roleId not in (4) ";
+		query = session.createQuery(getUserDisplayNameBasedOnProjectQuery);
+		query.setParameter("parentValue", ParentValue);
+		userComboList = (ArrayList<Users>) query.list();
+		if(userComboList.size() != 0){
+			logger.info("user list: " + userComboList.size());
+			for(Users user: userComboList){
+			    logger.info("In DAOIMPL, userId:  " + user.getUserId() + ", userName: " + user.getDisplayName());
+				UserDisplayNameBasedOnProject.put(user.getUserId(), user.getDisplayName());
+			}
+		}else{
+			UserDisplayNameBasedOnProject.put(0, "Select User");
+		}
+		return UserDisplayNameBasedOnProject;
 	}
 
 }

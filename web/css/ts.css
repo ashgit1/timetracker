@@ -103,3 +103,39 @@
 	{
 	background: #109177;
 }
+
+/* Header section*/
+
+.fixedheader {
+	position:fixed;
+	top:0px;
+	left:0px;
+	width:100%;
+	color:#CCC;
+	background:#333;
+	padding:20px;
+}
+
+/* Footer section*/
+
+.fixedfooter {
+	position:fixed;
+	bottom:0px;
+	left:0px;
+	width:100%;
+	color:#CCC;
+	background:#333;
+	padding:8px;
+}
+
+/* Login Div */
+
+/* #loginDiv{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -50px;
+    margin-left: -50px;
+    width: 200px;
+    height: 200px;
+} */

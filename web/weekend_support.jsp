@@ -15,6 +15,10 @@
 
 </head>
 <body onload="defaul()">
+
+<jsp:include page="includes/_header.jsp"></jsp:include><br><br><br>
+<jsp:include page="includes/_navigation.jsp"></jsp:include>
+<div id="content">
 <%
     if ((session.getAttribute("userName") == null) || (session.getAttribute("userName") == "") || 
     	(session.getAttribute("displayName")) == null || (session.getAttribute("displayName") =="")) {
@@ -22,13 +26,14 @@
 You are not logged in<br/><a href="login.jsp">Please Login</a>
 <%} else {
 %>
+<%--
 Welcome <%=session.getAttribute("displayName")%>
-<%-- userName <%=session.getAttribute("userName")%> --%>
+ userName <%=session.getAttribute("userName")%> 
 <a href="logout.jsp">Log out</a>
-<%
-    }
-%>
-	<div class="form-style-5">
+--%>
+
+<!-- TSD Support form -->
+<div class="form-style-5">
 
 		<H1 align="center">
 			<span class="number">TS</span>TSD-IDC
@@ -51,7 +56,7 @@ Welcome <%=session.getAttribute("displayName")%>
 				<label for="detail">Details:</label> 
 				<select id="detail" name="detail" onChange="changetextbox()">
 					<option value="Weekend support">Weekend support</option>
-					<option value="Public Holiday Support -on-call">PublicHoliday Support -on-call</option>
+					<option value="Public Holiday Support-on-call">PublicHoliday Support-on-call</option>
 					<option value="Comp-off availed">Comp-off availed</option>
 				</select>
 			</fieldset>
@@ -75,5 +80,12 @@ Welcome <%=session.getAttribute("displayName")%>
 
 		</form>
 	</div>
+<!-- TSD Support form Ends -->
+<%
+    }
+%>
+</div>
+<jsp:include page="includes/_footer.jsp"></jsp:include>
+	
 </body>
 </html>

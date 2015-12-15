@@ -6,7 +6,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.wipro.timetracker.dao.CompOffDao;
 import com.wipro.timetracker.dao.LoginDao;
+import com.wipro.timetracker.daoimpl.CompOffDaoImpl;
 import com.wipro.timetracker.daoimpl.LoginDaoImpl;
 
 /**
@@ -17,6 +20,8 @@ public class LoginController extends HttpServlet {
 	boolean isUserValid;
 	HttpSession session;
 	String displayName;
+	String RoleName ;
+	CompOffDao compDao;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -43,7 +48,15 @@ public class LoginController extends HttpServlet {
 	    	session = request.getSession();
 	        session.setAttribute("displayName", displayName);
 	        session.setAttribute("userName", username);
-	        response.sendRedirect("weekend_support.jsp");
+	        
+	        compDao = new CompOffDaoImpl();
+	        RoleName = compDao.getRoleName(compDao.getUserID(username));
+	        if(RoleName.equals("Admin")){
+	        	response.sendRedirect("admin_view_support.jsp");
+	        }else{
+	        	response.sendRedirect("weekend_support.jsp");
+	        }
+	        
 	    }else{
 	    	session = request.getSession();
 	        session.setAttribute("invalidUser", username);

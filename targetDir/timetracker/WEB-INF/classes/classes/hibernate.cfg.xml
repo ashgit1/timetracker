@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>
+
+		<!-- Database connection settings -->
+		<property name="connection.driver_class">org.apache.derby.jdbc.ClientDriver</property>
+		<property name="connection.url">jdbc:derby://localhost:1527/timetracker</property>
+		<!-- <property name="connection.username"></property>
+		<property name="connection.password"></property> -->
+
+		<!-- JDBC connection pool (use the built-in) -->
+		<property name="connection.pool_size">1</property>
+
+		<!-- Derby dialect -->
+		 <property name="dialect">org.hibernate.dialect.DerbyDialect</property> 
+
+		<!-- <property name="dialect">org.hibernate.dialect.SQLServerDialect</property> -->
+
+		<!-- Disable the second-level cache -->
+		<!-- <property name="cache.provider_class">org.hibernate.cache.internal.NoCacheProvider</property> -->
+
+		<!-- Echo all executed SQL to stdout -->
+		<property name="show_sql">true</property>
+		<!-- true(to show the sql queries), false(it will not show the sql queries) -->
+
+		<!-- Drop and re-create the database schema on startup -->
+		<property name="hbm2ddl.auto">update</property>
+		<!-- create(to drop and re-create the schema), update(to update) -->
+
+		<!-- Model Classes for timetracker -->
+		<mapping class="com.wipro.timetracker.model.Project" />
+		<mapping class="com.wipro.timetracker.model.Role" />
+		<mapping class="com.wipro.timetracker.model.Users" />
+		<mapping class="com.wipro.timetracker.model.CompOff" />
+		<mapping class="com.wipro.timetracker.model.Efforts" />
+		
+	</session-factory>
+
+</hibernate-configuration>
+
