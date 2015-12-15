@@ -21,7 +21,7 @@ $(document).ready(function(){
 });
 </script>
 
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<!-- <script src="http://code.jquery.com/jquery-latest.min.js"></script> -->
 <script>
 
 	$(document).ready(function() {
@@ -86,6 +86,51 @@ You are not logged in<br/><a href="login.jsp">Please Login</a>
 </form>
 </center>
 <hr>
+
+<% if(compOffList!=null){%>
+	
+<TABLE BORDER="1" id="compOffDataTable">
+		<!-- <caption><font size="5px" color="#1E90FF">Release Daily Status Build Summary</font></caption> -->
+		<thead>
+			<TR class="noExl">
+				<TH>ACTION DATE</TH>
+				<TH>TYPE</TH>
+				<TH>TYPE DETAIL</TH>
+				<TH>TASK TYPE</TH>
+				<TH>TIME TAKEN</TH>
+				<TH>TASK DESCRIPTION</TH>
+				<TH>COMP OFF UTILIZED</TH>
+				<TH>Modify/Delete</TH>
+			</TR>
+		</thead>
+		
+		<%
+			for (int i=0; i<compOffList.size(); i++) {
+		%>
+		<TR>
+			<TD><%= compOffList.get(i).getActionDate()%></TD>
+			<TD><%= compOffList.get(i).getType()%></TD>
+			<TD><%= compOffList.get(i).getTypeDetail()%></TD>
+			<TD><%= compOffList.get(i).getTaskType()%></TD>
+			<TD><%= compOffList.get(i).getTimeTaken()%></TD>
+			<TD><%= compOffList.get(i).getTaskDesc()%></TD>
+			<TD><%= compOffList.get(i).getCompOffUtilized()%></TD>
+			<TD>
+				<a href="edit_support.jsp" style="text-decoration: none;"><font color="blue">Edit</font></a> | 
+				<a href="delete_support.jsp" style="text-decoration: none;"><font color="red">Delete</font></a>
+			</TD>
+		</TR>
+		<%} %>
+	
+	</TABLE>
+	<!-- TSD View Support form End-->
+<%} else {%>
+	<font color="red">It seems user has not added any compoff/weekend details as of now !</font> 
+	<!-- <a href="weekend_support.jsp">Add Now</a> -->
+<%}
+%>
+
+
 <%}%>
 </div>
 
