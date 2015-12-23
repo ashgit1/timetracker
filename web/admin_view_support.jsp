@@ -54,6 +54,7 @@ List<String> displayProjectList = new ArrayList<String>();
 UsersDao userDao = new UsersDaoImpl();
 displayProjectList = userDao.getProjectName();
 List<CompOff> compOffList = (ArrayList<CompOff>) session.getAttribute("compOffListBasedOnUserId");
+String emptyCompOff = (String) session.getAttribute("compOffListBasedOnUserIdEmpty");
 %>
 <jsp:include page="includes/_header.jsp"></jsp:include><br><br><br>
 <jsp:include page="includes/_adminNavigation.jsp"></jsp:include>
@@ -90,7 +91,6 @@ You are not logged in<br/><a href="login.jsp">Please Login</a>
 <% if(compOffList!=null){%>
 	
 <TABLE BORDER="1" id="compOffDataTable">
-		<!-- <caption><font size="5px" color="#1E90FF">Release Daily Status Build Summary</font></caption> -->
 		<thead>
 			<TR class="noExl">
 				<TH>ACTION DATE</TH>
@@ -124,12 +124,18 @@ You are not logged in<br/><a href="login.jsp">Please Login</a>
 	
 	</TABLE>
 	<!-- TSD View Support form End-->
-<%} else {%>
-	<font color="red">It seems user has not added any compoff/weekend details as of now !</font> 
-	<!-- <a href="weekend_support.jsp">Add Now</a> -->
+		<% if(compOffList.size()==0){%>
+			<font color="red">It seems user has not added any compoff/weekend details as of now !</font> 
+		<% }%>
+	
+	
+<%} else if(emptyCompOff!=null){%>
+	<font color="red">It seems user has not added any compoff/weekend details as of now !</font>
+	
+<%} else{%>
+	<font color="blue">Please select Project followed by Name...</font> 
 <%}
 %>
-
 
 <%}%>
 </div>

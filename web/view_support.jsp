@@ -51,7 +51,6 @@ List<CompOff> compOffList = compDao.getAllCompOff(userId);
 <% if(compOffList!=null){%>
 	
 <TABLE BORDER="1" id="compOffDataTable">
-		<!-- <caption><font size="5px" color="#1E90FF">Release Daily Status Build Summary</font></caption> -->
 		<thead>
 			<TR class="noExl">
 				<TH>ACTION DATE</TH>

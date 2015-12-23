@@ -68,18 +68,14 @@ public class CompOffDaoImpl implements CompOffDao{
 		query.setParameter("uid", userID);
 		allComfOff = (List<CompOff>) query.list();
 		
-		logger.info("compoff list size: " +allComfOff.size());
-		System.out.println("compoff list size: " +allComfOff.size());
-		
 		if(allComfOff.size() > 0){
-			return allComfOff;
+			logger.info("compoff list size: " +allComfOff.size());
+			System.out.println("compoff list size: " +allComfOff.size());
 		}else{
 			transaction.rollback();
 			session.close();
 		}
-		
-		return null;
-		
+		return allComfOff;
 	}
 
 	@Override

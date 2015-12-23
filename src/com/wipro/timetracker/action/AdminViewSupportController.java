@@ -45,9 +45,16 @@ public class AdminViewSupportController extends HttpServlet {
 		
 		String userID = request.getParameter("userNameDisplay");
 		logger.info("userID: " + userID);
-		List<CompOff> compOffList = compDao.getAllCompOff(Integer.parseInt(userID));
 		session = request.getSession();
-		session.setAttribute("compOffListBasedOnUserId", compOffList);
+		List<CompOff> compOffList = compDao.getAllCompOff(Integer.parseInt(userID));
+	
+		if(compOffList!=null && compOffList.size() !=0){
+			session.setAttribute("compOffListBasedOnUserId", compOffList);
+		}else if(compOffList.size()==0){
+			session.setAttribute("compOffListBasedOnUserIdEmpty", "Empty");
+			session.removeAttribute("compOffListBasedOnUserId");
+		}
+		
 		response.sendRedirect("admin_view_support.jsp");
 	}
 
