@@ -96,4 +96,14 @@
     <servlet-name>AdminViewSupport</servlet-name>
     <url-pattern>/AdminViewSupport</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EffortsController</display-name>
+    <servlet-name>EffortsController</servlet-name>
+    <servlet-class>com.wipro.timetracker.action.EffortsController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EffortsController</servlet-name>
+    <url-pattern>/EffortsController</url-pattern>
+  </servlet-mapping>
 </web-app>

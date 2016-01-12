@@ -42,7 +42,7 @@ li a:hover:not(.active) {
 		<li><a class="active" href="/timetracker/login.jsp">Home</a></li>
 		<li><a href="/timetracker/weekend_support.jsp">Add Support</a></li>
 		<li><a href="/timetracker/view_support.jsp">View Support</a></li>
-		<li><a href="#news">Add Efforts</a></li>
+		<li><a href="/timetracker/add_efforts.jsp">Add Efforts</a></li>
 		<li><a href="#contact">View Efforts</a></li>
 		<li><a href="#contact">CO DashBoard</a></li>
 		<ul style="float: right; list-style-type: none;">

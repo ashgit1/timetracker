@@ -32,11 +32,11 @@ public class Efforts implements Serializable{
 	@Column(name="ATTEND_DATA")
 	private String attendData;
 	
-	@Column(name="TEAM")
+	/*@Column(name="TEAM")
 	private String team;
 	
 	@Column(name="PROJECT_ID", nullable = false)
-	private int projectId;
+	private int projectId;*/
 	
 	@Column(name="WEEKLY_HR")
 	private int weeklyHr;
@@ -86,7 +86,7 @@ public class Efforts implements Serializable{
 	public void setAttendData(String attendData) {
 		this.attendData = attendData;
 	}
-	public String getTeam() {
+	/*public String getTeam() {
 		return team;
 	}
 	public void setTeam(String team) {
@@ -97,7 +97,7 @@ public class Efforts implements Serializable{
 	}
 	public void setProjectId(int projectId) {
 		this.projectId = projectId;
-	}
+	}*/
 	public int getWeeklyHr() {
 		return weeklyHr;
 	}

@@ -45,6 +45,14 @@ $(document).ready(function(){
 					}
 				});
 	}
+	
+/*
+ * Delte pop up
+ */
+ 	function deleteCompoff(){
+   		$('#delcompoff').css('display','block');
+ 		$('#delcompoff').dialog();
+ 	}
 </script>
 
 </head>
@@ -116,8 +124,8 @@ You are not logged in<br/><a href="login.jsp">Please Login</a>
 			<TD><%= compOffList.get(i).getTaskDesc()%></TD>
 			<TD><%= compOffList.get(i).getCompOffUtilized()%></TD>
 			<TD>
-				<a href="edit_support.jsp" style="text-decoration: none;"><font color="blue">Edit</font></a> | 
-				<a href="delete_support.jsp" style="text-decoration: none;"><font color="red">Delete</font></a>
+				<a href="#" style="text-decoration: none;" id="loader"><font color="blue">Edit</font></a> | 
+				<a href="" style="text-decoration: none;"><font color="red">Delete</font></a>
 			</TD>
 		</TR>
 		<%} %>
@@ -139,6 +147,15 @@ You are not logged in<br/><a href="login.jsp">Please Login</a>
 
 <%}%>
 </div>
+
+<div id="delcompoff" style="display: none;">
+	These record will be permanently deleted and cannot be recovered. Are you sure?<br>
+	<form method="post" action="deleteCompOff">
+		<input type="submit" id="delCompOffButton" value="Ok"/>
+		<input type="button" value="Cancel" onclick="window.opener=null;window.close();return false;"/>
+	</form>
+</div>
+
 
 <jsp:include page="includes/_footer.jsp"></jsp:include>
 </body>
