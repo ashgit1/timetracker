@@ -1,18 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="timetracker" default="war" basedir=".">
+<project name="timetracker" default="usage" basedir=".">
+
+	<property file="buildLocal.properties" />
+
 	<property name="project-name" value="${ant.project.name}" />
 	<property name="builder" value="Ashu" />
 	<property name="war-file-name" value="${project-name}.war" />
 	<property name="source-directory" value="src" />
-	<property name="classes-directory" value="build" />
+	<property name="classes-directory" value="build/classes" />
+	<property name="build-dir" value="web/WEB-INF/classes"/>
 	<property name="web-directory" value="web" />
 	<property name="web-xml-file" value="web/WEB-INF/web.xml" />
+	<property name="build-directory" value="targetDir" />
+	<property name="doc-directory" value="documentation" />
+
 	<tstamp prefix="build-info">
 		<format property="current-date" pattern="d-MMMM-yyyy" locale="en" />
 		<format property="current-time" pattern="hh:mm:ss a z" locale="en" />
 	</tstamp>
-	<property name="build-directory" value="targetDir" />
-	<target name="war" depends="">
+
+	<path id="master-classpath">
+		<fileset dir="${web-directory}/WEB-INF/lib">
+			<include name="*.jar" />
+		</fileset>
+		<pathelement path="${classes-directory}" />
+	</path>
+
+	<target name="build" depends="clean" description="Compile main source tree java files">
+		<mkdir dir="${classes-directory}" />
+		<javac destdir="${classes-directory}" source="1.7" target="1.7" debug="true" deprecation="false" optimize="false" failonerror="true">
+			<src path="${source-directory}" />
+			<classpath refid="master-classpath" />
+		</javac>
+		<mkdir dir="${build-dir}" />
+		<javac destdir="${build-dir}" source="1.7" target="1.7" debug="true" deprecation="false" optimize="false" failonerror="true">
+			<src path="${source-directory}" />
+			<classpath refid="master-classpath" />
+		</javac>
+	</target>
+
+	<target name="deploy" depends="build" description="Deploy application">
+		<copy todir="${deploy.path}/${project-name}" preservelastmodified="true">
+			<fileset dir="${web-directory}">
+				<include name="**/*.*" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="deploywar" depends="build">
+		<echo>Generating new ${war-file-name} file</echo>
 		<mkdir dir="${build-directory}" />
 		<delete file="${build-directory}/${war-file-name}" />
 		<war warfile="${build-directory}/${war-file-name}" webxml="${web-xml-file}">
@@ -27,5 +63,103 @@
 				<attribute name="Built-At" value="${build-info.current-time}" />
 			</manifest>
 		</war>
+
+		<copy todir="${deploy.path}" preservelastmodified="true">
+			<fileset dir="${build-directory}">
+				<include name="*.war" />
+			</fileset>
+		</copy>
+
 	</target>
+
+	<!-- 
+	<target name="clean">
+		<echo>Cleaning the old ${project-name}.war file</echo>
+		<delete file="${build-directory}/${war-file-name}">
+		</delete>
+	</target>
+	-->
+
+	<target name="clean" description="Clean output directories">
+		<echo>Cleaning the old ${project-name}.war file and class files in ${classes-directory}</echo>
+		<delete>
+			<fileset dir="${classes-directory}">
+				<include name="**/*.class" />
+			</fileset>
+		</delete>
+		<delete file="${build-directory}/${war-file-name}" />
+		<delete includeemptydirs="true">
+			<fileset dir="${deploy.path}/${project-name}">
+				<include name="**/*"/>
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="generatedoc">
+		<echo>Generating the documentation for ${project-name} project</echo>
+		<mkdir dir="${doc-directory}" />
+		<javadoc packagenames="com.wipro.timetracker.* " sourcepath="${source-directory}" destdir="${doc-directory}" 
+				 version="true" windowtitle="TimeTracker Application">
+			<doctitle>
+				<![CDATA[= TimeTracker Application =]]>
+			</doctitle>
+			<bottom>
+				<![CDATA[Copyright © 2016. All Rights Reserved.]]>
+			</bottom >
+			<group title="util packages" packages="com.wipro.timetracker.util.* " />
+			<group title="controller packages" packages="com.wipro.timetracker.action.* " />
+			<group title="data packages" packages="com.wipro.timetracker.dao.*:com.wipro.timetracker.daoimpl.* " />
+			<group title="entity pacakge" packages="com.wipro.timetracker.model.* " />
+			<group title="test pacakge" packages="com.wipro.timetracker.test.* " />
+		</javadoc>
+		<echo message="java doc has been generated!" />
+	</target>
+
+	<target name="buildjar">
+		<jar destfile="${build-directory}/ttutil/ttutil.jar" basedir="${classes-directory}" includes="com/wipro/timetracker/util/**">
+			<manifest>
+				<attribute name="IP" value="com.wipro.timetracker.util" />
+			</manifest>
+		</jar>
+	</target>
+
+	<!-- ============================================================ -->
+	<!-- Tomcat tasks -->
+	<!-- ============================================================ -->
+	<path id="catalina-ant-classpath">
+		<!-- We need the Catalina jars for Tom cat -->
+		<!-- * for other app servers - check the docs -->
+		<fileset dir="${appserver.lib}">
+			<include name="catalina-ant.jar" />
+			<include name="tomcat-coyote.jar" />
+			<include name="tomcat-util.jar" />
+		</fileset>
+		<fileset dir="${appserver.home}/bin">
+			<include name="tomcat-juli.jar" />
+		</fileset>
+	</path>
+	
+	<taskdef name="reload" classname="org.apache.catalina.ant.ReloadTask">
+		<classpath refid="catalina-ant-classpath"></classpath>
+	</taskdef>
+	
+	<target name="reload" description="Reload application in Tomcat">
+		<reload url="${tomcat.manager.url}" username="${tomcat.manager.username}" password="${tomcat.manager.password}" path="/${project-name}" />
+	</target>
+
+	<target name="usage">
+		<echo message=""/>
+		<echo message="${project-name} build file"/>
+		<echo message="-----------------------------------"/>
+		<echo message=""/>
+		<echo message="Available targets are:"/>
+		<echo message=""/>
+		<echo message="deploy       --> Deploy application as directory." />
+		<echo message="deploywar    --> Deploy application as a WAR file." />
+		<echo message="buildjar     --> Builds util jar for util package." />
+		<echo message="generatedoc  --> Generate documentation for the App." />
+		<echo message="clean        --> Cleans the output directories."/>
+		<echo message="build        --> Compiles the source code."/>
+	</target>
+
 </project>
